@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>응대 리포트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 27px;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .dropdown {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            background-color: white;
+            width: calc(100% - 2px);
+            z-index: 1000;
+        }
+        .dropdown li {
+            padding: 5px;
+            cursor: pointer;
+        }
+        .dropdown li:hover {
+            background-color: #f0f0f0;
+        }
+        #submitted {
+            text-align: center;
+        }
+        .checkbox-group {
+            display: flex;
+            gap: 10px;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+        input[type="checkbox"], input[type="radio"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #555;
+            margin-right: 5px;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+        }
+        input[type="checkbox"]:checked, input[type="radio"]:checked {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        input[type="checkbox"]:checked::before, input[type="radio"]:checked::before {
+            content: '\2714';
+            font-size: 12px;
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 2px;
+        }
+        .checkbox-group label span {
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>응대 리포트</h1>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="productName">제품명 I</label>
+                <input type="text" id="productName" name="productName" required>
+                <ul id="productDropdown" class="dropdown"></ul>
+            </div>
+            <div class="form-group">
+                <label for="productNameII">제품명 II</label>
+                <input type="text" id="productNameII" name="productNameII" required>
+                <ul id="productDropdownII" class="dropdown"></ul>
+            </div>
+            <div class="form-group">
+                <label for="productNameIII">제품명 III</label>
+                <input type="text" id="productNameIII" name="productNameIII">
+                <ul id="productDropdownIII" class="dropdown"></ul>
+            </div>
+            <div class="form-group">
+                <label>구매여부</label>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="purchased" value="yes" required><span>예</span></label>
+                    <label><input type="radio" name="purchased" value="no" required><span>아니오</span></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="age">연령</label>
+                <select id="age" name="age" required>
+                    <option value="">연령대 선택</option>
+                    <option value="10s">10대</option>
+                    <option value="20s">20대</option>
+                    <option value="30s">30대</option>
+                    <option value="40s">40대</option>
+                    <option value="50s">50대 이상</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nationality">국적</label>
+                <select id="nationality" name="nationality" required>
+                    <option value="">국적 선택</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>성별</label>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="gender" value="male" required><span>남성</span></label>
+                    <label><input type="radio" name="gender" value="female" required><span>여성</span></label>
+                    <label><input type="radio" name="gender" value="other" required><span>기타</span></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>반응</label>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="reaction" value="positive" required><span>긍정적</span></label>
+                    <label><input type="radio" name="reaction" value="neutral" required><span>중립적</span></label>
+                    <label><input type="radio" name="reaction" value="negative" required><span>부정적</span></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="responseWordingI">응대 워딩 I</label>
+                <input type="text" id="responseWordingI" name="responseWordingI">
+            </div>
+            <div class="form-group">
+                <label for="responseWordingII">응대 워딩 II</label>
+                <input type="text" id="responseWordingII" name="responseWordingII">
+            </div>
+            <div class="form-group">
+                <label for="responseWordingIII">응대 워딩 III</label>
+                <input type="text" id="responseWordingIII" name="responseWordingIII">
+            </div>
+            <div class="form-group">
+                <label for="feedback">기타 피드백</label>
+                <textarea id="feedback" name="feedback" required></textarea>
+            </div>
+            <button type="submit">제출</button>
+        </form>
+        <div id="submitted" style="display: none;">
+            <p>응답해 주셔서 감사합니다!</p>
+            <button id="resetBtn">다른 응답 제출</button>
+            <button id="downloadBtn">응답 다운로드 (CSV)</button>
+        </div>
+    </div>
+
+    <script>
+        const productOptions = [
+            { en: "없음", ko: "없음" },
+            { en: "LILIT-01", ko: "릴릿-공일" },
+            { en: "LILIT-01(BR)", ko: "릴릿-공일-비알" },
+            { en: "LILIT-01(K)", ko: "릴릿-공일-케이" },
+            { en: "BY-01", ko: "비와이-공일" },
+            { en: "HEIZER-01", ko: "하이저-공일" },
+            { en: "PINO-01", ko: "피노-공일" }
+        ];
+
+        const nationalityOptions = [
+            "한국", "중국", "일본", "그밖의 아시아", "미국/캐나다", "유럽", "기타"
+        ];
+
+        let responses = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('surveyForm');
+            const submitted = document.getElementById('submitted');
+            const resetBtn = document.getElementById('resetBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const productName = document.getElementById('productName');
+            const productNameII = document.getElementById('productNameII');
+            const productNameIII = document.getElementById('productNameIII');
+            const productDropdown = document.getElementById('productDropdown');
+            const productDropdownII = document.getElementById('productDropdownII');
+            const productDropdownIII = document.getElementById('productDropdownIII');
+            const nationalitySelect = document.getElementById('nationality');
+
+            // 국적 옵션 추가
+            nationalityOptions.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                nationalitySelect.appendChild(optionElement);
+            });
+
+            // 제품명 자동완성
+            function setupProductAutocomplete(input, dropdown) {
+                input.addEventListener('input', function() {
+                    const value = this.value.toLowerCase();
+                    const filtered = productOptions.filter(product => 
+                        product.en.toLowerCase().includes(value) || 
+                        product.ko.toLowerCase().includes(value)
+                    );
+                    
+                    dropdown.innerHTML = '';
+                    filtered.forEach(product => {
+                        const li = document.createElement('li');
+                        li.textContent = `${product.en} (${product.ko})`;
+                        li.addEventListener('click', function() {
+                            input.value = product.en;
+                            dropdown.style.display = 'none';
+                        });
+                        dropdown.appendChild(li);
+                    });
+                    
+                    if (filtered.length > 0) {
+                        dropdown.style.display = 'block';
+                    } else {
+                        dropdown.style.display = 'none';
+                    }
+                });
+
+                input.addEventListener('focus', function() {
+                    if (dropdown.children.length > 0) {
+                        dropdown.style.display = 'block';
+                    }
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (e.target !== input && e.target !== dropdown) {
+                        dropdown.style.display = 'none';
+                    }
+                });
+            }
+
+            setupProductAutocomplete(productName, productDropdown);
+            setupProductAutocomplete(productNameII, productDropdownII);
+            setupProductAutocomplete(productNameIII, productDropdownIII);
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const response = Object.fromEntries(formData.entries());
+                responses.push(response);
+                form.style.display = 'none';
+                submitted.style.display = 'block';
+            });
+
+            resetBtn.addEventListener('click', function() {
+                form.reset();
+                form.style.display = 'block';
+                submitted.style.display = 'none';
+            });
+
+            downloadBtn.addEventListener('click', function() {
+                const headers = ['제품명 I', '제품명 II', '제품명 III', '구매여부', '연령', '국적', '성별', '반응', '응대 워딩 I', '응대 워딩 II', '응대 워딩 III', '기타 피드백'];
+                const csvData = [
+                    headers,
+                    ...responses.map(r => [
+                        r.productName,
+                        r.productNameII,
+                        r.productNameIII,
+                        r.purchased,
+                        r.age,
+                        r.nationality,
+                        r.gender,
+                        r.reaction,
+                        r.responseWordingI,
+                        r.responseWordingII,
+                        r.responseWordingIII,
+                        r.feedback
+                    ])
+                ].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+
+                const blob = new Blob(['\uFEFF' + csvData], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'survey_responses.csv');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+    </script>
+</body>
+</html>
